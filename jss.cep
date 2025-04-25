@@ -1,0 +1,38 @@
+function searchLocation() {
+    const cep = document.getElementById('locationInput').value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (!/^\d{8}$/.test(cep)) {
+      alert('Por favor, insira um CEP válido com 8 dígitos.');
+      return;
+    }
+    fetch(`https://brasilapi.com.br/api/cep/v1/${cep}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('CEP não encontrado');
+        }
+        return response.json();
+      })
+      .then(data => {
+       
+        if (data && data.city && data.state) {
+          const rua = data.street || 'Não disponível';
+          const numero = data.number || 'Não disponível';
+          const bairro = data.neighborhood || 'Não disponível';
+
+       
+          document.getElementById('addressInfo').innerHTML = `
+            <strong>Informações Encontradas:</strong><br>
+            <strong>Rua:</strong> ${rua}<br>
+            <strong>Número:</strong> ${numero}<br>
+            <strong>Bairro:</strong> ${bairro}<br>
+            <strong>Cidade:</strong> ${data.city}<br>
+            <strong>Estado:</strong> ${data.state}<br>
+          `;
+        } else {
+          alert('Dados não encontrados para o CEP informado.');
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao buscar o CEP:', error); // Log de erro para debug
+        alert('Erro ao buscar o CEP. Verifique se está correto.');
+      });
+  }
