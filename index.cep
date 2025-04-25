@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Busca de Informações</title>
+
+   
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="./assets/css/pages/map/index.css" />
+  </head>
+  <body>
+    <h1>Busca de Informações</h1>
+
+
+    <section id="manual-location" class="location-search">
+      <label for="locationInput">Insira o CEP:</label>
+      <input type="text" id="locationInput" placeholder="Ex: 30590-251" />
+      <button onclick="searchLocation()">Buscar</button>
+    </section>
+
+
+    <section id="addressInfo"></section>
+
+
+    <script src="sla.js"></script> 
+  </body>
+</html>
